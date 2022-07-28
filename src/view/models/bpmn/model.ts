@@ -1,4 +1,3 @@
-import { BpmnXmlAdapter } from '@logicflow/extension';
 import StartEvent from '@logicflow/extension/es/bpmn/events/StartEvent';
 import SequenceFlow from '@logicflow/extension/es/bpmn/flow/SequenceFlow';
 import Gateway from '@logicflow/extension/es/bpmn/gateways/ExclusiveGateway';
@@ -12,9 +11,6 @@ import { theme } from './theme';
 export default <ModelType>{
   name: 'bpmn',
   label: 'BPMN 模型',
-  plugins: [
-    BpmnXmlAdapter
-  ],
   defaultEdgeType: SequenceFlow.type,
   theme,
   nodeTypes: [
