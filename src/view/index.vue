@@ -50,42 +50,21 @@
 
     const state: any = reactive({
         type: "bpmn",
-        code: "",
     });
 
     const onViewFun = (type:string) => {
-        if (type === "bpmn") {
-            state.type = "bpmn"
-            //state.code = codeData.bpmn
-        }
-        if (type === "nodeRed") {
-            state.type = "nodeRed"
-            //state.code = codeData.nodeRed
-        }
-        router.push({ path: '/view',query: state})
-
+      state.type = type
+      router.push({ path: '/view',query: state})
     }
 
     const onEditFun = (type:string) => {
-        if (type === "bpmn") {
-            state.type = "bpmn"
-            //state.code = codeData.bpmn
-        }
-        if (type === "nodeRed") {
-            state.type = "nodeRed"
-            //state.code = codeData.nodeRed
-        }
-        router.push({ path: '/edit',query: {
-                type: state.type,
-                code: state.code
-            }
-        })
+      state.type = type
+      router.push({ path: '/edit',query: state})
     }
 
 </script>
 
 <style scoped>
-
     .card-header {
         display: flex;
         justify-content: space-between;

@@ -14,6 +14,7 @@
     "@logicflow/core": "^1.1.22",
     "@logicflow/extension": "^1.1.22",
     "element-plus": "^2.2.10",
+    "highlight.js": "^11.6.0",
     "vue": "^3.2.37",
     "vue-router": "^4.1.2"
   },

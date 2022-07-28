@@ -3,10 +3,8 @@
       <div class="layout-header">
         <toolbar />
       </div>
-      <div style="display: block; flex:auto;min-height: 0">
-        <div ref="container"
-             style="height: 100%; width: 100%;padding: 4px;box-shadow: 0 0 4px rgb(0 0 0 / 30%) inset; background: #fff">
-        </div>
+      <div ref="container"
+           style="height: 100%; width: 100%;padding: 4px;box-shadow: 0 0 4px rgb(0 0 0 / 30%) inset; background: #fff">
       </div>
     </div>
    <el-drawer
@@ -36,8 +34,6 @@
 
  const route = useRoute();
  const getQuerys = () => {
-   let quere = route.query;
-   console.log("quere",quere, quere.type,quere.code)
    return route.query;
  };
 
@@ -254,7 +250,6 @@
  const container = ref<HTMLElement>()
  const codeDrawerVisible = ref(false)
  const code = ref('')
- const existAdapterOut = ref(false)
 
  const getModel = () => {
    let model  = models.find(m => m.name === getQuerys().type) || models[0]
@@ -307,8 +302,6 @@
       ]
     }
     viewer.initLogicFlow(_logicflow_options)
-
-    existAdapterOut.value = !!viewer.lf?.adapterOut
   })
 
 </script>
@@ -334,24 +327,6 @@
     box-shadow: 0 0 4px rgb(0 0 0 / 30%) inset;
     background: #fff;
       z-index: 999;
-  }
-
-  .lf-mini-map {
-    padding-top: 0;
-    right: 5px;
-    bottom: 5px;
-    height: 120px;
-    box-shadow: 0 1px 4px rgb(0 0 0 / 30%);
-    background-color: rgba(255, 255, 255, 0.8);
-  }
-
-  .lf-mini-map-header,
-  .lf-mini-map-close {
-    visibility: hidden;
-  }
-
-  .lf-mini-map .lf-graph {
-    background: none;
   }
 
   pre,
