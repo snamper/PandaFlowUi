@@ -24,12 +24,23 @@ a:hover {
   color: #535bf2;
 }
 
+html,
 body {
   margin: 0;
+  padding: 0;
+  margin: 0;
   display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+  width: 100%;
+  height: 100%;
+}
+
+#app {
+  width: 100%;
+  height: 100%;
+}
+
+.ml-4{
+  margin-left: 4px;
 }
 
 h1 {
@@ -58,13 +69,6 @@ button:focus-visible {
 
 .card {
   padding: 2em;
-}
-
-#app {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
 }
 
 @media (prefers-color-scheme: light) {

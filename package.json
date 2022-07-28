@@ -14,7 +14,8 @@
     "@logicflow/core": "^1.1.22",
     "@logicflow/extension": "^1.1.22",
     "element-plus": "^2.2.10",
-    "vue": "^3.2.37"
+    "vue": "^3.2.37",
+    "vue-router": "^4.1.2"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^3.0.0",
