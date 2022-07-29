@@ -17,7 +17,7 @@
 </template>
 
 <script setup lang="ts">
-import { usePropertiesPanelData } from 'logicflow-useapi';
+import { usePropertiesPanelData } from '../../../useapi';
 import { ref } from 'vue';
 import './style.css';
 

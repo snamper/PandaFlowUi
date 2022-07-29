@@ -64,7 +64,7 @@
 </template>
 
 <script setup lang="ts">
-import { usePropertiesPanelData } from 'logicflow-useapi';
+import { usePropertiesPanelData } from '../../../useapi';
 import { userTaskIcon } from '../icons';
 import './style.css';
 

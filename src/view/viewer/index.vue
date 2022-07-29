@@ -3,9 +3,7 @@
       <div class="layout-header">
         <toolbar />
       </div>
-      <div ref="container"
-           style="height: 100%; width: 100%;padding: 4px;box-shadow: 0 0 4px rgb(0 0 0 / 30%) inset; background: #fff">
-      </div>
+      <div ref="container" class="layout-container"></div>
     </div>
    <el-drawer
           v-model="codeDrawerVisible"
