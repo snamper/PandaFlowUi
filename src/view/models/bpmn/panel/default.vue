@@ -1,19 +1,14 @@
 <template>
-  <h1>{{ title }}</h1>
-  <a-form layout="vertical" class="properties-panel-form" :model="data" name="ppform">
-    <a-form-item label="编号" extra="唯一标识">
-      <a-input v-model:value="data.id" />
-    </a-form-item>
-    <a-form-item label="名称" name="text">
-      <a-textarea v-model:value="data.text" auto-size />
-    </a-form-item>
-    <a-form-item label="描述" name="text">
-      <a-textarea v-model:value="data.text" auto-size />
-    </a-form-item>
-    <a-form-item label="扩展属性" name="properties">
-      <properties-editor :value="data.properties" />
-    </a-form-item>
-  </a-form>
+  <h2>{{ title }}</h2>
+  <el-divider/>
+  <el-form :model="data" label-width="50px">
+    <el-form-item label="编号" prop="id">
+      <el-input v-model:value="data.id" />
+    </el-form-item>
+    <el-form-item label="名称" prop="text">
+      <el-input v-model="data.text"/>
+    </el-form-item>
+  </el-form>
 </template>
 
 <script setup lang="ts">
@@ -22,5 +17,5 @@ import { ref } from 'vue';
 import './style.css';
 
 const data = usePropertiesPanelData()
-const title = ref('Default Properties Panel')
+const title = ref('默认面板')
 </script>

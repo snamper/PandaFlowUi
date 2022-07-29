@@ -1,9 +1,7 @@
 <template>
-  <div class="layout">
-    <div class="layout-header">
-      <toolbar />
-    </div>
-    <div>
+  <el-container class="layout">
+    <el-header class="layout-header"><toolbar /></el-header>
+    <el-main>
       <splitpanes class="default-theme" @resized="onResize" :dbl-click-splitter="false" :push-other-panes="false">
         <pane :size="propertiesPanel.collapsed ? 100 - paneSize / 100 : 100 - paneSize">
           <div ref="container" class="layout-container"></div>
@@ -15,21 +13,28 @@
           </keep-alive>
         </pane>
       </splitpanes>
-    </div>
-  </div>
-
+    </el-main>
+  </el-container>
+  <el-drawer
+      v-model="codeDrawerVisible"
+      title="Json代码!"
+      size="40%"
+      @open="setCode"
+  >
+    <highlight autodetect :code="code" />
+  </el-drawer>
 </template>
 
 <script setup lang="ts">
   import { Definition } from '@logicflow/core'
-  import '@logicflow/core/dist/style/index.css'
   import { DndPanel, InsertNodeInPolyline, Menu, MiniMap, SelectionSelect, Snapshot } from '@logicflow/extension'
-  import '@logicflow/extension/lib/style/index.css'
-  import 'highlight.js/styles/stackoverflow-light.css'
   import { PropertiesPanelConfig, useModeler } from '../useapi'
   import { addListener } from 'resize-detector'
   import { Pane, Splitpanes } from 'splitpanes'
-  import 'splitpanes/dist/splitpanes.css'
+  import highlightjs from "@highlightjs/vue-plugin"
+  import hljs from 'highlight.js/lib/core'
+  import json from 'highlight.js/lib/languages/json'
+  import xml from 'highlight.js/lib/languages/xml'
   import { nextTick, onMounted, provide, ref } from 'vue'
   import models from '../models'
   import propertiesPanelConfigs from '../models/propertiesPanel'
@@ -45,107 +50,107 @@
     "bpmn": {
       "nodes": [
         {
-          "id": "Event_0vu9f9k",
+          "id": "Event_3m8r8f6",
           "type": "bpmn:startEvent",
-          "x": 250,
-          "y": 130,
+          "x": 260,
+          "y": 260,
           "properties": {}
         },
         {
-          "id": "Event_23njbc0",
-          "type": "bpmn:endEvent",
-          "x": 781,
-          "y": 130,
-          "properties": {}
-        },
-        {
-          "id": "Activity_0fiu8id",
+          "id": "Activity_1ioo5if",
           "type": "bpmn:userTask",
-          "x": 410,
-          "y": 130,
+          "x": 420,
+          "y": 260,
           "properties": {}
         },
         {
-          "id": "Activity_1t0d2vr",
+          "id": "Activity_1j9h95q",
           "type": "bpmn:serviceTask",
-          "x": 610,
-          "y": 130,
+          "x": 620,
+          "y": 260,
+          "properties": {}
+        },
+        {
+          "id": "Event_340rvte",
+          "type": "bpmn:endEvent",
+          "x": 780,
+          "y": 260,
           "properties": {}
         }
       ],
       "edges": [
         {
-          "id": "Flow_10c8bo7",
+          "id": "Flow_098qupl",
           "type": "bpmn:sequenceFlow",
-          "sourceNodeId": "Event_0vu9f9k",
-          "targetNodeId": "Activity_0fiu8id",
+          "sourceNodeId": "Event_3m8r8f6",
+          "targetNodeId": "Activity_1ioo5if",
           "startPoint": {
-            "x": 268,
-            "y": 130
+            "x": 278,
+            "y": 260
           },
           "endPoint": {
-            "x": 360,
-            "y": 130
+            "x": 370,
+            "y": 260
           },
           "properties": {},
           "pointsList": [
             {
-              "x": 268,
-              "y": 130
+              "x": 278,
+              "y": 260
             },
             {
-              "x": 360,
-              "y": 130
+              "x": 370,
+              "y": 260
             }
           ]
         },
         {
-          "id": "Flow_3gtob6a",
+          "id": "Flow_0su6amd",
           "type": "bpmn:sequenceFlow",
-          "sourceNodeId": "Activity_0fiu8id",
-          "targetNodeId": "Activity_1t0d2vr",
+          "sourceNodeId": "Activity_1ioo5if",
+          "targetNodeId": "Activity_1j9h95q",
           "startPoint": {
-            "x": 460,
-            "y": 130
+            "x": 470,
+            "y": 260
           },
           "endPoint": {
-            "x": 560,
-            "y": 130
+            "x": 570,
+            "y": 260
           },
           "properties": {},
           "pointsList": [
             {
-              "x": 460,
-              "y": 130
+              "x": 470,
+              "y": 260
             },
             {
-              "x": 560,
-              "y": 130
+              "x": 570,
+              "y": 260
             }
           ]
         },
         {
-          "id": "Flow_0fvq0tq",
+          "id": "Flow_2lkq3kj",
           "type": "bpmn:sequenceFlow",
-          "sourceNodeId": "Activity_1t0d2vr",
-          "targetNodeId": "Event_23njbc0",
+          "sourceNodeId": "Activity_1j9h95q",
+          "targetNodeId": "Event_340rvte",
           "startPoint": {
-            "x": 660,
-            "y": 130
+            "x": 670,
+            "y": 260
           },
           "endPoint": {
             "x": 763,
-            "y": 130
+            "y": 260
           },
           "properties": {},
           "pointsList": [
             {
-              "x": 660,
-              "y": 130
+              "x": 670,
+              "y": 260
             },
             {
               "x": 763,
-              "y": 130
+              "y": 260
             }
           ]
         }
@@ -253,19 +258,34 @@
 
   const container = ref<HTMLElement>()
   const paneSize = ref(30)
+  const codeDrawerVisible = ref(false)
+  const code = ref('')
 
   const getModel = () => {
     let model  = models.find(m => m.name === getQuerys().type) || models[0]
     getQuerys().type == "bpmn" ? model.newData = codeData.bpmn : model.newData = codeData.nodeRed
-    console.log("model",model)
     return model
   }
-
   const propertiesPanelConfig: PropertiesPanelConfig = propertiesPanelConfigs[getModel().name]
-
   // Modeler
   const modeler = useModeler(getModel(), propertiesPanelConfig)
   const { propertiesPanel } = modeler
+
+  const setCode = () => {
+    let c
+    if ( getQuerys().code) {
+      c = modeler.lf?.getGraphRawData()
+    } else {
+      c = modeler.lf?.getGraphData()
+    }
+    if (typeof c == 'object') c = JSON.stringify(c, null, 2)
+    console.log(c)
+    code.value = c
+  }
+
+  hljs.registerLanguage('json', json);
+  hljs.registerLanguage('xml', xml);
+  const highlight = highlightjs.component
 
   function containerResize() {
     if (container.value && modeler.lf) {
@@ -285,7 +305,7 @@
   }
 
   // provide context
-  provide('modeler_context', modeler)
+  provide('modeler_context', Object.assign(modeler, { codeDrawerVisible }))
 
   // init
   onMounted(() => {
@@ -358,13 +378,13 @@
     background: none;
   }
 
-
   .layout{
     height: 100%;
     width: 100%;
     margin: 0;
     overflow: hidden;
   }
+
   .layout-header{
     background: #fff;
     height: 40px;

@@ -1,11 +1,9 @@
 <template>
-    <div class="layout">
-      <div class="layout-header">
-        <toolbar />
-      </div>
-      <div ref="container" class="layout-container"></div>
-    </div>
-   <el-drawer
+  <el-container class="layout" >
+    <el-header class="layout-header"><toolbar /></el-header>
+    <el-main><div ref="container" class="layout-container"></div></el-main>
+  </el-container>
+  <el-drawer
           v-model="codeDrawerVisible"
           title="Json代码!"
           size="40%"
@@ -19,16 +17,15 @@
 <script setup lang="ts">
  import {provide, ref, onMounted} from "vue";
  import { useRoute } from "vue-router";
-  import highlightjs from "@highlightjs/vue-plugin"
-  import { Definition } from '@logicflow/core'
-  import { MiniMap } from '@logicflow/extension'
-
-  import hljs from 'highlight.js/lib/core'
-  import json from 'highlight.js/lib/languages/json'
-  import xml from 'highlight.js/lib/languages/xml'
-  import { useViewer } from '../useapi'
-  import models from '../models'
-  import Toolbar from "./toolbar.vue";
+ import highlightjs from "@highlightjs/vue-plugin"
+ import { Definition } from '@logicflow/core'
+ import { MiniMap } from '@logicflow/extension'
+ import hljs from 'highlight.js/lib/core'
+ import json from 'highlight.js/lib/languages/json'
+ import xml from 'highlight.js/lib/languages/xml'
+ import { useViewer } from '../useapi'
+ import models from '../models'
+ import Toolbar from "./toolbar.vue";
 
  const route = useRoute();
  const getQuerys = () => {

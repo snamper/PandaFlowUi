@@ -1,13 +1,12 @@
+<!--整个面板信息-->
 <template>
-  <h1>{{ title }}</h1>
-  <a-form layout="vertical" class="properties-panel-form" :model="data" name="ppform">
-    <a-form-item label="编号" extra="流程模型的唯一标识">
-      <a-input v-model:value="data.id" />
-    </a-form-item>
-    <a-form-item label="扩展属性" name="properties">
-      <properties-editor :value="data.properties" />
-    </a-form-item>
-  </a-form>
+  <h2>{{ title }}</h2>
+  <el-divider/>
+  <el-form :model="data" label-width="50px">
+    <el-form-item label="编号" prop="id">
+      <el-input v-model:value="data.id" />
+    </el-form-item>
+  </el-form>
 </template>
 
 <script setup lang="ts">

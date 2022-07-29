@@ -7,27 +7,27 @@
       <el-button disabled>
         <SvgIcon name="elementFolder"/>
       </el-button>
-      <el-dropdown>
-        <el-button >
+      <el-button >
+        <el-dropdown :tabindex="1">
           <SvgIcon name="elementDArrowLeft"/>
-        </el-button>
-        <template #dropdown>
-          <el-dropdown-menu>
-            <el-dropdown-item>导入 模型文件（*.json）</el-dropdown-item>
-          </el-dropdown-menu>
-        </template>
-      </el-dropdown>
-      <el-dropdown >
-        <el-button >
+          <template #dropdown>
+            <el-dropdown-menu>
+              <el-dropdown-item>导入 模型文件（*.json）</el-dropdown-item>
+            </el-dropdown-menu>
+          </template>
+        </el-dropdown>
+      </el-button>
+      <el-button >
+        <el-dropdown>
           <SvgIcon name="elementDArrowRight"/>
-        </el-button>
-        <template #dropdown>
-          <el-dropdown-menu>
-            <el-dropdown-item id="exportRaw" @click="exportGraphRawData(modelType + '.json')">导出 模型文件（*.json）</el-dropdown-item>
-            <el-dropdown-item id="exportPng" key="png" @click="exportPng(modelType)">导出 PNG 文件</el-dropdown-item>
-          </el-dropdown-menu>
-        </template>
-      </el-dropdown>
+          <template #dropdown>
+            <el-dropdown-menu>
+              <el-dropdown-item id="exportRaw" @click="exportGraphRawData(modelType + '.json')">导出 模型文件（*.json）</el-dropdown-item>
+              <el-dropdown-item id="exportPng" key="png" @click="exportPng(modelType)">导出 PNG 文件</el-dropdown-item>
+            </el-dropdown-menu>
+          </template>
+        </el-dropdown>
+      </el-button>
     </el-button-group>
     <el-button-group class="ml-4">
       <el-button :disabled="!modified" type="primary">
