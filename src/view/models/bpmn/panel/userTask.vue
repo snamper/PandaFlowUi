@@ -6,14 +6,14 @@
   <el-divider/>
   <el-tabs model-value="first">
     <el-tab-pane label="常规" name="first">
-      <el-form :model="data" label-width="50px">
-        <el-form-item label="编号" prop="id">
+      <el-form :model="data" label-position="left" label-width="50px">
+        <el-form-item label="编号:" prop="id">
           <el-input v-model:value="data.id" />
         </el-form-item>
-        <el-form-item label="名称" prop="text">
+        <el-form-item label="名称:" prop="text">
           <el-input v-model="data.text"/>
         </el-form-item>
-        <el-form-item label="描述" prop="text">
+        <el-form-item label="描述:" prop="text">
           <el-input
               v-model="data.properties.description"
               :rows="2"
@@ -23,7 +23,7 @@
       </el-form>
     </el-tab-pane>
     <el-tab-pane label="参与者" name="second">
-      <el-form :model="data.properties" label-width="100px">
+      <el-form :model="data.properties" label-position="left" label-width="100px">
         <el-form-item label="分配策略">
           <el-select v-model="data.properties.fpcl" placeholder="抢任务/会签">
             <el-option value="single" label="抢任务"/>
@@ -54,7 +54,7 @@
       </el-form>
     </el-tab-pane>
     <el-tab-pane label="表单" name="third">
-      <el-form :model="data.properties" label-width="100px">
+      <el-form :model="data.properties" label-position="left" label-width="100px">
         <el-form-item label="表单模式">
           <el-select v-model="data.properties.formtype" placeholder="单表单/工作台加">
             <el-option value="single" label="单表单"/>

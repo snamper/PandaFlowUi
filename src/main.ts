@@ -11,7 +11,6 @@ import 'splitpanes/dist/splitpanes.css'
 import * as svg from '@element-plus/icons-vue';
 import SvgIcon from '@/components/svgIcon/index.vue';
 
-
 import router from './router/index'
 
 const app = createApp(App);

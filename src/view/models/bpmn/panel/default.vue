@@ -1,7 +1,7 @@
 <template>
   <h2>{{ title }}</h2>
   <el-divider/>
-  <el-form :model="data" label-width="50px">
+  <el-form :model="data" label-position="left" label-width="50px">
     <el-form-item label="编号" prop="id">
       <el-input v-model:value="data.id" />
     </el-form-item>

@@ -1,7 +1,6 @@
 <template>
-    <div>
-        <el-row :gutter="24" class="index">
-            <el-col :span="12">
+        <el-row :gutter="24" style="margin:10px 0px 0px 10px;">
+            <el-col :span="6">
                 <el-card class="box-card">
                     <template #header>
                         <div class="card-header">
@@ -15,7 +14,7 @@
                     <img alt="bpmn" src="/img/bpmn.png" />
                 </el-card>
             </el-col>
-            <el-col :span="12">
+            <el-col :span="6">
                 <el-card class="box-card">
                     <template #header>
                         <div class="card-header">
@@ -30,7 +29,6 @@
                 </el-card>
             </el-col>
         </el-row>
-    </div>
 </template>
 
 <script setup lang="ts">

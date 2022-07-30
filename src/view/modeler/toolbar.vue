@@ -1,40 +1,30 @@
 <template>
   <div>
     <el-button-group>
-      <el-button  disabled>
-        <SvgIcon name="elementDocument"/>
-      </el-button>
-      <el-button disabled>
-        <SvgIcon name="elementFolder"/>
-      </el-button>
-      <el-button >
-        <el-dropdown>
-          <SvgIcon name="elementDArrowLeft"/>
-          <template #dropdown>
-            <el-dropdown-menu>
-              <el-dropdown-item>导入 模型文件（*.json）</el-dropdown-item>
-            </el-dropdown-menu>
-          </template>
-        </el-dropdown>
-      </el-button>
-      <el-button >
-        <el-dropdown>
-          <SvgIcon name="elementDArrowRight"/>
-          <template #dropdown>
-            <el-dropdown-menu>
-              <el-dropdown-item id="exportRaw" @click="exportGraphRawData(modelType + '.json')">导出 模型文件（*.json）</el-dropdown-item>
-              <el-dropdown-item id="exportPng" key="png" @click="exportPng(modelType)">导出 PNG 文件</el-dropdown-item>
-            </el-dropdown-menu>
-          </template>
-        </el-dropdown>
-      </el-button>
-    </el-button-group>
-    <el-button-group class="ml-4">
       <el-button :disabled="!modified" type="primary">
         <SvgIcon name="elementMessageBox"/>保存
       </el-button>
     </el-button-group>
     <el-button-group class="ml-4">
+      <el-dropdown split-button>
+          导入
+          <template #dropdown>
+            <el-dropdown-menu>
+              <el-dropdown-item>模型文件（*.json）</el-dropdown-item>
+            </el-dropdown-menu>
+          </template>
+      </el-dropdown>
+      <el-dropdown split-button>
+          导出
+          <template #dropdown>
+            <el-dropdown-menu>
+              <el-dropdown-item id="exportRaw" @click="exportGraphRawData(modelType + '.json')">模型文件（*.json）</el-dropdown-item>
+              <el-dropdown-item id="exportPng" key="png" @click="exportPng(modelType)">PNG 文件</el-dropdown-item>
+            </el-dropdown-menu>
+          </template>
+      </el-dropdown>
+    </el-button-group>
+    <el-button-group class="ml-4" >
       <el-button :disabled="undoDisable" @click="undo">
         <SvgIcon name="elementCaretLeft"/>
       </el-button>

@@ -1,24 +1,37 @@
 <template>
-    <div class="demo-collapse">
-        <el-collapse v-model="activeNames">
-            <el-collapse-item title="基础节点" name="base" >
-                <div
-                        class="red-ui-palette-node ui-draggable ui-draggable-handle"
-                        @mousedown="startDrag(item)"
-                        v-for="(item, index) in baseNodes"
-                        :key="index"
-                        :style="{ backgroundColor: item.background }"
-                >
-                    <div class="red-ui-palette-label">{{item.text}}</div>
-                    <div class="red-ui-palette-icon-container">
-                        <div class="red-ui-palette-icon" :style="{ backgroundImage: `url(${item.icon})`}"></div>
-                    </div>
-                    <div class="red-ui-palette-port red-ui-palette-port-input"></div>
-                    <div class="red-ui-palette-port red-ui-palette-port-output"></div>
-                </div>
-            </el-collapse-item>
-        </el-collapse>
-    </div>
+  <div style="margin: 10px 0 0 10px">
+    <el-input
+        v-model="nodeText"
+        placeholder="名称搜索节点"
+        clearable
+    >
+    </el-input>
+    <el-collapse v-model="activeNames">
+      <el-collapse-item v-for="item in nodeList" :title="item.title" :name="item.name" >
+        <el-tooltip
+            class="box-item"
+            effect="dark"
+            v-for="(baseNode, index) in item.baseNodes"
+            :content="baseNode.content"
+            placement="right"
+        >
+          <div
+              class="red-ui-palette-node ui-draggable ui-draggable-handle"
+              @mousedown="startDrag(baseNode)"
+              :key="index"
+              :style="{ backgroundColor: baseNode.background }"
+          >
+            <div class="red-ui-palette-label">{{baseNode.text}}</div>
+            <div class="red-ui-palette-icon-container">
+              <div class="red-ui-palette-icon" :style="{ backgroundImage: `url(${baseNode.icon})`}"></div>
+            </div>
+            <div class="red-ui-palette-port red-ui-palette-port-input"></div>
+            <div class="red-ui-palette-port red-ui-palette-port-output"></div>
+          </div>
+        </el-tooltip>
+      </el-collapse-item>
+    </el-collapse>
+  </div>
 </template>
 
 <script lang="ts" setup>
@@ -43,43 +56,55 @@
     const handleChange = (val: string[]) => {
         console.log(val)
     }
-    const baseNodes = ref([
-        {
+    const nodeList = ref([
+      {
+        "title": "基础节点",
+        "name": "base",
+        "baseNodes": [
+          {
             type: 'start-node',
             text: 'start',
+            content: "这个节点是start",
             background: 'rgb(166, 187, 207)',
             icon: startIcon
-        },
-        {
+          },
+          {
             type: 'fetch-node',
             text: 'fetch',
+            content: "这个节点是fetch",
             background: 'rgb(231, 231, 174)',
             icon: fetchIcon
-        },
-        {
+          },
+          {
             type: 'function-node',
             text: 'function',
+            content: "这个节点是function",
             background: 'rgb(253, 208, 162)',
             icon: functionIcon
-        },
-        {
+          },
+          {
             type: 'switch-node',
             text: 'switch',
+            content: "这个节点是switch",
             background: 'rgb(226, 217, 110)',
             icon: switchIcon
-        },
-        {
+          },
+          {
             type: 'swap-node',
             text: 'swap',
+            content: "这个节点是swap",
             background: 'rgb(226, 217, 110)',
             icon: swapIcon
-        },
-        {
+          },
+          {
             type: 'delay-node',
             text: 'delay',
+            content: "这个节点是delay",
             background: 'rgb(230, 224, 248)',
             icon: delayIcon
-        }
+          }
+        ]
+      }
     ])
 </script>
 <style scoped>

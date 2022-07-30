@@ -259,7 +259,7 @@
   }
 
   const container = ref<HTMLElement>()
-  const paneSize = ref(30)
+  const paneSize = ref(20)
   const codeDrawerVisible = ref(false)
   const code = ref('')
 

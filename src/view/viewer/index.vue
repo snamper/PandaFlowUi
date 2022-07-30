@@ -36,107 +36,107 @@
    "bpmn": {
      "nodes": [
        {
-         "id": "Event_0vu9f9k",
+         "id": "Event_3m8r8f6",
          "type": "bpmn:startEvent",
-         "x": 250,
-         "y": 130,
+         "x": 260,
+         "y": 260,
          "properties": {}
        },
        {
-         "id": "Event_23njbc0",
-         "type": "bpmn:endEvent",
-         "x": 781,
-         "y": 130,
-         "properties": {}
-       },
-       {
-         "id": "Activity_0fiu8id",
+         "id": "Activity_1ioo5if",
          "type": "bpmn:userTask",
-         "x": 410,
-         "y": 130,
+         "x": 420,
+         "y": 260,
          "properties": {}
        },
        {
-         "id": "Activity_1t0d2vr",
+         "id": "Activity_1j9h95q",
          "type": "bpmn:serviceTask",
-         "x": 610,
-         "y": 130,
+         "x": 620,
+         "y": 260,
+         "properties": {}
+       },
+       {
+         "id": "Event_340rvte",
+         "type": "bpmn:endEvent",
+         "x": 780,
+         "y": 260,
          "properties": {}
        }
      ],
      "edges": [
        {
-         "id": "Flow_10c8bo7",
+         "id": "Flow_098qupl",
          "type": "bpmn:sequenceFlow",
-         "sourceNodeId": "Event_0vu9f9k",
-         "targetNodeId": "Activity_0fiu8id",
+         "sourceNodeId": "Event_3m8r8f6",
+         "targetNodeId": "Activity_1ioo5if",
          "startPoint": {
-           "x": 268,
-           "y": 130
+           "x": 278,
+           "y": 260
          },
          "endPoint": {
-           "x": 360,
-           "y": 130
+           "x": 370,
+           "y": 260
          },
          "properties": {},
          "pointsList": [
            {
-             "x": 268,
-             "y": 130
+             "x": 278,
+             "y": 260
            },
            {
-             "x": 360,
-             "y": 130
+             "x": 370,
+             "y": 260
            }
          ]
        },
        {
-         "id": "Flow_3gtob6a",
+         "id": "Flow_0su6amd",
          "type": "bpmn:sequenceFlow",
-         "sourceNodeId": "Activity_0fiu8id",
-         "targetNodeId": "Activity_1t0d2vr",
+         "sourceNodeId": "Activity_1ioo5if",
+         "targetNodeId": "Activity_1j9h95q",
          "startPoint": {
-           "x": 460,
-           "y": 130
+           "x": 470,
+           "y": 260
          },
          "endPoint": {
-           "x": 560,
-           "y": 130
+           "x": 570,
+           "y": 260
          },
          "properties": {},
          "pointsList": [
            {
-             "x": 460,
-             "y": 130
+             "x": 470,
+             "y": 260
            },
            {
-             "x": 560,
-             "y": 130
+             "x": 570,
+             "y": 260
            }
          ]
        },
        {
-         "id": "Flow_0fvq0tq",
+         "id": "Flow_2lkq3kj",
          "type": "bpmn:sequenceFlow",
-         "sourceNodeId": "Activity_1t0d2vr",
-         "targetNodeId": "Event_23njbc0",
+         "sourceNodeId": "Activity_1j9h95q",
+         "targetNodeId": "Event_340rvte",
          "startPoint": {
-           "x": 660,
-           "y": 130
+           "x": 670,
+           "y": 260
          },
          "endPoint": {
            "x": 763,
-           "y": 130
+           "y": 260
          },
          "properties": {},
          "pointsList": [
            {
-             "x": 660,
-             "y": 130
+             "x": 670,
+             "y": 260
            },
            {
              "x": 763,
-             "y": 130
+             "y": 260
            }
          ]
        }
