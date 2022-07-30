@@ -8,7 +8,7 @@
         <SvgIcon name="elementFolder"/>
       </el-button>
       <el-button >
-        <el-dropdown :tabindex="1">
+        <el-dropdown>
           <SvgIcon name="elementDArrowLeft"/>
           <template #dropdown>
             <el-dropdown-menu>

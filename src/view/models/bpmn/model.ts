@@ -7,6 +7,7 @@ import EndEvent from './nodes/EndEvent';
 import ServiceTask from './nodes/ServiceTask';
 import UserTask from './nodes/UserTask';
 import { theme } from './theme';
+import "./style.css"
 
 export default <ModelType>{
   name: 'bpmn',

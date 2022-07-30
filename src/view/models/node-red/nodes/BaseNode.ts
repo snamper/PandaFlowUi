@@ -1,4 +1,4 @@
-import { h, RectNode, RectNodeModel } from "@logicflow/core";
+import { h, NodeConfig, RectNode, RectNodeModel } from "@logicflow/core";
 import { getBytesLength } from '../util';
 
 
@@ -6,7 +6,7 @@ class RedNodeModel extends RectNodeModel {
   /**
    * 初始化
    */
-  initNodeData(data) {
+  initNodeData(data: any) {
     super.initNodeData(data)
     this.width = 100;
     this.height = 30;
@@ -68,7 +68,7 @@ class RedNodeModel extends RectNodeModel {
    *
    */
   getOutlineStyle() {
-    const style = super.getOutlineStyle();
+    const style: any = super.getOutlineStyle();
     style.stroke = 'transparent';
     style.hover.stroke = 'transparent';
     return style;
@@ -79,7 +79,7 @@ class RedNode extends RectNode {
    * 1.1.7版本后支持在view中重写锚点形状。
    * 重写锚点新增
    */
-  getAnchorShape(anchorData) {
+  getAnchorShape(anchorData:any) {
     const { x, y, type } = anchorData;
     return h("rect", {
       x: x - 5,
@@ -90,7 +90,7 @@ class RedNode extends RectNode {
     });
   }
   getIcon () {
-    return null;
+
   }
   getShape() {
     const {

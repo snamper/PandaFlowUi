@@ -41,6 +41,8 @@
   import Toolbar from './toolbar.vue'
   import {useRoute} from "vue-router";
 
+  import dndExtension from '../models/dndPanel'
+
   const route = useRoute();
   const getQuerys = () => {
     return route.query;
@@ -267,6 +269,8 @@
     return model
   }
   const propertiesPanelConfig: PropertiesPanelConfig = propertiesPanelConfigs[getModel().name]
+
+  const dndExtensionPlus = dndExtension[getModel().name]
   // Modeler
   const modeler = useModeler(getModel(), propertiesPanelConfig)
   const { propertiesPanel } = modeler
@@ -279,7 +283,6 @@
       c = modeler.lf?.getGraphData()
     }
     if (typeof c == 'object') c = JSON.stringify(c, null, 2)
-    console.log(c)
     code.value = c
   }
 
@@ -339,7 +342,7 @@
         enabled: true,
       },
       plugins: [
-        DndPanel, InsertNodeInPolyline, Menu, MiniMap, SelectionSelect, Snapshot
+        dndExtensionPlus, InsertNodeInPolyline, Menu, MiniMap, SelectionSelect, Snapshot
       ]
     }
     modeler.initLogicFlow(_logicflow_options)

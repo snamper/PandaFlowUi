@@ -1,6 +1,7 @@
 import { h } from '@logicflow/core';
 import { startIcon as Icon } from "../icons";
 import BaseNode from "./BaseNode";
+import GraphModel from "@logicflow/core/types/model/GraphModel";
 
 class StartNode extends BaseNode.view {
   getIcon() {
@@ -17,7 +18,7 @@ class StartNode extends BaseNode.view {
       className: 'node-red-start',
       href: Icon,
       onClick: () => {
-        graphModel.eventCenter.emit('node-red:start')
+        graphModel.eventCenter.emit('node-red:start',{})
       }
     })
   }

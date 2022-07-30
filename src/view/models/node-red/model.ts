@@ -6,6 +6,7 @@ import FunctionNode from "./nodes/FunctionNode";
 import StartNode from "./nodes/StartNode";
 import SwapNode from "./nodes/SwapNode";
 import SwitchNode from "./nodes/SwitchNode";
+
 import "./style.css";
 
 export default <ModelType>{
@@ -19,7 +20,6 @@ export default <ModelType>{
     SwapNode,
     FetchNode,
     DelayNode,
-    // VueHtmlNode
   ],
   edgeTypes: [
     FlowLink

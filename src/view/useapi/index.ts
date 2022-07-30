@@ -167,7 +167,7 @@ export function useModeler(model: ModelType, propertiesPanelConfig: PropertiesPa
 
   const _initModeler = () => {
     _ctx.lf = modeler.lf
-    modeler.lf?.setPatternItems([
+    /*modeler.lf?.extension.dndPanel.setPatternItems([
       {
         label: '框选',
         icon: selectIcon,
@@ -179,7 +179,7 @@ export function useModeler(model: ModelType, propertiesPanelConfig: PropertiesPa
         }
       },
       ...model.nodeTypes
-    ])
+    ])*/
 
     modeler.lf?.on('history:change', ({ data }: any) => {
       setUndoState(data)
