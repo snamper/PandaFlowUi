@@ -1,5 +1,5 @@
 <template>
-    <div style="margin: 10px 0 0 10px">
+    <div style="margin: 10px 0 0 10px;">
         <el-input
             v-model="nodeText"
             placeholder="名称搜索节点"
@@ -98,40 +98,20 @@
             icon: gatewayIcon
           }
         ]
-      }
-    ])
-
-    const baseNodes = ref([
-        {
+      },
+      {
+        "title": "高级节点",
+        "name": "expert",
+        "baseNodes": [
+          {
             type: 'bpmn:startEvent',
             text: '开始',
+            content: "这个节点是bpmn:startEvent",
             background: 'rgb(166, 187, 207)',
             icon: startIcon
-        },
-        {
-            type: 'bpmn:endEvent',
-            text: '结束',
-            background: 'rgb(231, 231, 174)',
-            icon: endIcon
-        },
-        {
-            type: 'bpmn:userTask',
-            text: '用户任务',
-            background: 'rgb(253, 208, 162)',
-            icon: userTaskIcon
-        },
-        {
-            type: 'bpmn:serviceTask',
-            text: '服务任务',
-            background: 'rgb(226, 217, 110)',
-            icon: serviceTaskIcon
-        },
-        {
-            type: 'bpmn:exclusiveGateway',
-            text: '网关',
-            background: 'rgb(226, 217, 110)',
-            icon: gatewayIcon
-        }
+          },
+        ]
+      }
     ])
 </script>
 <style scoped>

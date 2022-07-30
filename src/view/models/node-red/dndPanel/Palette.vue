@@ -104,6 +104,19 @@
             icon: delayIcon
           }
         ]
+      },
+      {
+        "title": "高级节点",
+        "name": "expert",
+        "baseNodes": [
+          {
+            type: 'fetch-node',
+            text: 'fetch',
+            content: "这个节点是fetch",
+            background: 'rgb(231, 231, 174)',
+            icon: fetchIcon
+          },
+        ]
       }
     ])
 </script>
