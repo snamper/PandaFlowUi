@@ -35,7 +35,7 @@
 </template>
 
 <script lang="ts" setup>
-    import { delayIcon,fetchIcon,functionIcon,startIcon,switchIcon,swapIcon } from "../icons";
+import {delayIcon, fetchIcon, functionIcon, startIcon, switchIcon, swapIcon, zan} from "../icons";
     import LogicFlow from "@logicflow/core"
     import { ref } from 'vue'
     const props = defineProps({
@@ -111,10 +111,10 @@
         "baseNodes": [
           {
             type: 'fetch-node',
-            text: 'fetch',
-            content: "这个节点是fetch",
+            text: 'zan',
+            content: "这个节点是zan",
             background: 'rgb(231, 231, 174)',
-            icon: fetchIcon
+            icon: zan
           },
         ]
       }
