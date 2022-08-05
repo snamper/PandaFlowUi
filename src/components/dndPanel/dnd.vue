@@ -1,8 +1,5 @@
 <template>
-    <div
-            class="red-ui-palette-node ui-draggable ui-draggable-handle"
-            :style="{ backgroundColor: baseNode.background }"
-    >
+    <div class="red-ui-palette-node" :style="{ backgroundColor: baseNode.background }">
         <div class="red-ui-palette-label">{{baseNode.text}}</div>
         <div class="red-ui-palette-icon-container">
             <div class="red-ui-palette-icon" :style="{ backgroundImage: `url(${baseNode.icon})`}"></div>

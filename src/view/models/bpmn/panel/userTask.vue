@@ -8,7 +8,7 @@
     <el-tab-pane label="常规" name="first">
       <el-form :model="data" label-position="left" label-width="50px">
         <el-form-item label="编号:" prop="id">
-          <el-input v-model:value="data.id" />
+          <el-input v-model:value="data.id" disabled />
         </el-form-item>
         <el-form-item label="名称:" prop="text">
           <el-input v-model="data.text"/>
