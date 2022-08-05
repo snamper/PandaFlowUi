@@ -27,7 +27,7 @@
 
 <script setup lang="ts">
   import { Definition } from '@logicflow/core'
-  import { DndPanel, InsertNodeInPolyline, Menu, MiniMap, SelectionSelect, Snapshot } from '@logicflow/extension'
+  import { InsertNodeInPolyline, Menu, MiniMap, SelectionSelect, Snapshot } from '@logicflow/extension'
   import { PropertiesPanelConfig, useModeler } from '../useapi'
   import { addListener } from 'resize-detector'
   import { Pane, Splitpanes } from 'splitpanes'
@@ -276,12 +276,7 @@
   const { propertiesPanel } = modeler
 
   const setCode = () => {
-    let c
-    if ( getQuerys().code) {
-      c = modeler.lf?.getGraphRawData()
-    } else {
-      c = modeler.lf?.getGraphData()
-    }
+    let c = modeler.lf?.getGraphRawData()
     if (typeof c == 'object') c = JSON.stringify(c, null, 2)
     code.value = c
   }

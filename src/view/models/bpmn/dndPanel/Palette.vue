@@ -1,11 +1,5 @@
 <template>
-    <div style="margin: 10px 0 0 10px;">
-        <el-input
-            v-model="nodeText"
-            placeholder="名称搜索节点"
-            clearable
-        >
-        </el-input>
+    <div style="width:150px;margin: 10px 0 0 10px;">
         <el-collapse v-model="activeNames">
         <el-collapse-item v-for="item in nodeList" :title="item.title" :name="item.name" >
           <el-tooltip
@@ -15,19 +9,7 @@
               :content="baseNode.content"
               placement="right"
           >
-            <div
-                class="red-ui-palette-node ui-draggable ui-draggable-handle"
-                @mousedown="startDrag(baseNode)"
-                :key="index"
-                :style="{ backgroundColor: baseNode.background }"
-            >
-              <div class="red-ui-palette-label">{{baseNode.text}}</div>
-              <div class="red-ui-palette-icon-container">
-                <div class="red-ui-palette-icon" :style="{ backgroundImage: `url(${baseNode.icon})`}"></div>
-              </div>
-              <div class="red-ui-palette-port red-ui-palette-port-input"></div>
-              <div class="red-ui-palette-port red-ui-palette-port-output"></div>
-            </div>
+              <Dnd :normal="baseNode.normal" :baseNode="baseNode" @mousedown="startDrag(baseNode)"></Dnd>
           </el-tooltip>
         </el-collapse-item>
       </el-collapse>
@@ -36,9 +18,10 @@
 
 <script lang="ts" setup>
     import {Search} from '@element-plus/icons-vue';
-    import { endIcon, gatewayIcon, serviceTaskIcon, startIcon, userTaskIcon,search } from '../icons';
+    import { endIcon, gatewayIcon, serviceTaskIcon, startIcon, userTaskIcon,selectIcon } from '../icons';
     import LogicFlow from "@logicflow/core"
-    import { ref } from 'vue'
+    import { ref,watch } from 'vue'
+    import Dnd from "@/components/dndPanel/dnd.vue"
     const props = defineProps({
         lf: {
             type: LogicFlow,
@@ -49,15 +32,34 @@
     const activeNames = ref(['base'])
     const startDrag = (item:any) => {
         const { lf } = props;
-        lf.dnd.startDrag({
-            type: item.type,
-            text: item.text
-        })
+        if (item.type == "bpmn:select"){
+            lf.extension.selectionSelect.openSelectionSelect();
+            lf.on("selection:selected", (data) => {
+                lf.extension.selectionSelect.closeSelectionSelect();
+            });
+        }else {
+            lf.dnd.startDrag({
+                type: item.type,
+                text: item.text
+            })
+        }
     }
-    const handleChange = (val: string[]) => {
-        console.log(val)
-    }
+
     const nodeList = ref([
+      {
+         "title": "工具节点",
+         "name": "tools",
+         "baseNodes": [
+            {
+              type: 'bpmn:select',
+              text: '选框',
+              content: "选框工具，点击选框可在右侧画布选择",
+              background: 'rgb(166, 187, 207)',
+              icon: selectIcon,
+              normal: "none",
+            },
+         ]
+        },
       {
         "title": "基础节点",
         "name": "base",
@@ -67,50 +69,51 @@
             text: '开始',
             content: "这个节点是bpmn:startEvent",
             background: 'rgb(166, 187, 207)',
-            icon: startIcon
+            icon: startIcon,
+            normal: "left",
           },
           {
             type: 'bpmn:endEvent',
             text: '结束',
             content: "这个节点是bpmn:endEvent",
-            background: 'rgb(231, 231, 174)',
-            icon: endIcon
+            background: 'rgb(193, 75, 51)',
+            icon: endIcon,
+            normal: "right",
           },
-          {
-            type: 'bpmn:userTask',
-            text: '用户任务',
-            content: "这个节点是bpmn:userTask",
-            background: 'rgb(253, 208, 162)',
-            icon: userTaskIcon
-          },
-          {
-            type: 'bpmn:serviceTask',
-            text: '服务任务',
-            content: "这个节点是bpmn:serviceTask",
-            background: 'rgb(226, 217, 110)',
-            icon: serviceTaskIcon
-          },
-          {
-            type: 'bpmn:exclusiveGateway',
-            text: '网关',
-            content: "这个节点是bpmn:exclusiveGateway",
-            background: 'rgb(226, 217, 110)',
-            icon: gatewayIcon
-          }
         ]
       },
       {
-        "title": "高级节点",
-        "name": "expert",
+        "title": "任务节点",
+        "name": "task",
         "baseNodes": [
-          {
-            type: 'bpmn:startEvent',
-            text: '开始',
-            content: "这个节点是bpmn:startEvent",
-            background: 'rgb(166, 187, 207)',
-            icon: startIcon
-          },
+            {
+                type: 'bpmn:userTask',
+                text: '用户任务',
+                content: "这个节点是bpmn:userTask",
+                background: 'rgb(253, 208, 162)',
+                icon: userTaskIcon
+            },
+            {
+                type: 'bpmn:serviceTask',
+                text: '服务任务',
+                content: "这个节点是bpmn:serviceTask",
+                background: 'rgb(226, 217, 110)',
+                icon: serviceTaskIcon
+            },
         ]
+      },
+      {
+          "title": "网关节点",
+          "name": "gateway",
+          "baseNodes": [
+              {
+                  type: 'bpmn:exclusiveGateway',
+                  text: '网关',
+                  content: "这个节点是bpmn:exclusiveGateway",
+                  background: 'rgb(32, 174, 137)',
+                  icon: gatewayIcon
+              }
+          ]
       }
     ])
 </script>
@@ -165,10 +168,7 @@
         background-size: contain;
         background-repeat: no-repeat;
     }
-    .red-ui-palette-port-output {
-        left: auto;
-        right: -6px;
-    }
+
     .red-ui-palette-port {
         position: absolute;
         top: 8px;
@@ -181,7 +181,8 @@
         height: 10px;
         border: 1px solid #999;
     }
-    .red-ui-palette-port-output {
+
+   .red-ui-palette-port-output {
         left: auto;
         right: -6px;
     }

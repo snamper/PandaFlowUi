@@ -1,11 +1,5 @@
 <template>
-  <div style="margin: 10px 0 0 10px">
-    <el-input
-        v-model="nodeText"
-        placeholder="名称搜索节点"
-        clearable
-    >
-    </el-input>
+  <div style="width:150px;margin: 10px 0 0 10px">
     <el-collapse v-model="activeNames">
       <el-collapse-item v-for="item in nodeList" :title="item.title" :name="item.name" >
         <el-tooltip
@@ -38,6 +32,7 @@
 import {delayIcon, fetchIcon, functionIcon, startIcon, switchIcon, swapIcon, zan} from "../icons";
     import LogicFlow from "@logicflow/core"
     import { ref } from 'vue'
+import {selectIcon} from "../../bpmn/icons";
     const props = defineProps({
         lf: {
             type: LogicFlow,
@@ -46,17 +41,35 @@ import {delayIcon, fetchIcon, functionIcon, startIcon, switchIcon, swapIcon, zan
     })
     const activeNames = ref(['base'])
     const startDrag = (item:any) => {
-        const { lf } = props;
-        console.log(lf)
+      const { lf } = props;
+      if (item.type == "select"){
+        lf.extension.selectionSelect.openSelectionSelect();
+        lf.on("selection:selected", (data) => {
+          lf.extension.selectionSelect.closeSelectionSelect();
+        });
+      }else {
         lf.dnd.startDrag({
-            type: item.type,
-            text: item.text
+          type: item.type,
+          text: item.text
         })
+      }
     }
-    const handleChange = (val: string[]) => {
-        console.log(val)
-    }
+
     const nodeList = ref([
+      {
+        "title": "工具节点",
+        "name": "tools",
+        "baseNodes": [
+          {
+            type: 'select',
+            text: '选框',
+            content: "选框工具，点击选框可在右侧画布选择",
+            background: 'rgb(166, 187, 207)',
+            icon: selectIcon,
+            normal: "none",
+          },
+        ]
+      },
       {
         "title": "基础节点",
         "name": "base",
