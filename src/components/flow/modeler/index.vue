@@ -151,30 +151,17 @@
   })
 </script>
 
-<style>
-  .lf-mini-map {
-    padding-top: 0;
-    right: 5px;
-    bottom: 5px;
-    height: 120px;
-    box-shadow: 0 1px 4px rgb(0 0 0 / 30%);
-    background-color: rgba(255, 255, 255, 0.8);
-  }
-
-  .lf-mini-map-header,
-  .lf-mini-map-close {
-    visibility: hidden;
-  }
-
-  .lf-mini-map .lf-graph {
-    background: none;
-  }
-
+<style >
   .layout{
     height: 100%;
     width: 100%;
     margin: 0;
     overflow: hidden;
+  }
+  :deep(aside) {  /* 防止aside样式被外部样式覆盖！！ */
+    margin: 0;
+    padding: 0;
+    background: inherit;
   }
 
   .layout-header{

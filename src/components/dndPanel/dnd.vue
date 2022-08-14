@@ -11,7 +11,6 @@
 
 <script lang="ts" setup>
     import "./dnd.css"
-    import { ref,reactive } from 'vue'
 
     const props = defineProps({
         normal: {
