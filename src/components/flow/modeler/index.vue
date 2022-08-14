@@ -35,237 +35,30 @@
   import hljs from 'highlight.js/lib/core'
   import json from 'highlight.js/lib/languages/json'
   import xml from 'highlight.js/lib/languages/xml'
-  import { nextTick, onMounted, provide, ref } from 'vue'
+  import {nextTick, onMounted, provide, ref, watch} from 'vue'
   import models from '../models'
   import propertiesPanelConfigs from '../models/propertiesPanel'
   import Toolbar from './toolbar.vue'
-  import {useRoute} from "vue-router";
 
   import dndExtension from '../models/dndPanel'
-
-  const route = useRoute();
-  const getQuerys = () => {
-    return route.query;
-  };
-
-  let codeData = {
-    "bpmn": {
-      "nodes": [
-        {
-          "id": "Event_3m8r8f6",
-          "type": "bpmn:startEvent",
-          "x": 260,
-          "y": 260,
-          "properties": {}
-        },
-        {
-          "id": "Activity_1ioo5if",
-          "type": "bpmn:userTask",
-          "x": 420,
-          "y": 260,
-          "properties": {}
-        },
-        {
-          "id": "Activity_1j9h95q",
-          "type": "bpmn:serviceTask",
-          "x": 620,
-          "y": 260,
-          "properties": {}
-        },
-        {
-          "id": "Event_340rvte",
-          "type": "bpmn:endEvent",
-          "x": 780,
-          "y": 260,
-          "properties": {}
-        }
-      ],
-      "edges": [
-        {
-          "id": "Flow_098qupl",
-          "type": "bpmn:sequenceFlow",
-          "sourceNodeId": "Event_3m8r8f6",
-          "targetNodeId": "Activity_1ioo5if",
-          "startPoint": {
-            "x": 278,
-            "y": 260
-          },
-          "endPoint": {
-            "x": 370,
-            "y": 260
-          },
-          "properties": {},
-          "pointsList": [
-            {
-              "x": 278,
-              "y": 260
-            },
-            {
-              "x": 370,
-              "y": 260
-            }
-          ]
-        },
-        {
-          "id": "Flow_0su6amd",
-          "type": "bpmn:sequenceFlow",
-          "sourceNodeId": "Activity_1ioo5if",
-          "targetNodeId": "Activity_1j9h95q",
-          "startPoint": {
-            "x": 470,
-            "y": 260
-          },
-          "endPoint": {
-            "x": 570,
-            "y": 260
-          },
-          "properties": {},
-          "pointsList": [
-            {
-              "x": 470,
-              "y": 260
-            },
-            {
-              "x": 570,
-              "y": 260
-            }
-          ]
-        },
-        {
-          "id": "Flow_2lkq3kj",
-          "type": "bpmn:sequenceFlow",
-          "sourceNodeId": "Activity_1j9h95q",
-          "targetNodeId": "Event_340rvte",
-          "startPoint": {
-            "x": 670,
-            "y": 260
-          },
-          "endPoint": {
-            "x": 763,
-            "y": 260
-          },
-          "properties": {},
-          "pointsList": [
-            {
-              "x": 670,
-              "y": 260
-            },
-            {
-              "x": 763,
-              "y": 260
-            }
-          ]
-        }
-      ]
-    },
-    "nodeRed": {
-      nodes: [
-        {
-          id: 'node_1',
-          type: 'start-node',
-          x: 220,
-          y: 200,
-          text: 'start'
-        },
-        {
-          id: 'node_2',
-          type: 'fetch-node',
-          x: 420,
-          y: 200,
-          text: 'fetch data'
-        },
-        {
-          id: 'node_3',
-          type: 'function-node',
-          x: 620,
-          y: 200,
-          text: 'function'
-        },
-        {
-          id: 'node_4',
-          type: 'delay-node',
-          x: 420,
-          y: 300,
-          text: 'delay'
-        },
-        {
-          id: 'node_5',
-          type: 'switch-node',
-          x: 820,
-          y: 200,
-          text: 'switch'
-        },
-        {
-          id: 'node_6',
-          type: 'function-node',
-          x: 1020,
-          y: 200,
-          text: 'function'
-        },
-        {
-          id: 'node_7',
-          type: 'function-node',
-          x: 1020,
-          y: 300,
-          text: 'function'
-        }
-      ],
-      edges: [
-        {
-          type: 'flow-link',
-          sourceNodeId: 'node_1',
-          targetNodeId: 'node_2'
-        },
-        {
-          type: 'flow-link',
-          sourceNodeId: 'node_2',
-          targetNodeId: 'node_3'
-        },
-        {
-          type: 'flow-link',
-          sourceNodeId: 'node_3',
-          startPoint: {
-            x: 680,
-            y: 200
-          },
-          targetNodeId: 'node_4'
-        },
-        {
-          type: 'flow-link',
-          sourceNodeId: 'node_4',
-          startPoint: {
-            x: 370,
-            y: 300
-          },
-          targetNodeId: 'node_2'
-        },
-        {
-          type: 'flow-link',
-          sourceNodeId: 'node_3',
-          targetNodeId: 'node_5'
-        },
-        {
-          type: 'flow-link',
-          sourceNodeId: 'node_5',
-          targetNodeId: 'node_6'
-        },
-        {
-          type: 'flow-link',
-          sourceNodeId: 'node_5',
-          targetNodeId: 'node_7'
-        }
-      ]
-    }
-  }
+  const props = defineProps({
+      code: String,
+      type: String
+  })
+  const emit = defineEmits(["getCode"])
 
   const container = ref<HTMLElement>()
   const paneSize = ref(20)
   const codeDrawerVisible = ref(false)
-  const code = ref('')
+
+  const code = ref(props.code)
+  const type = ref(props.type)
+
+  watch(() => props.code, () => { code.value = props.code })
 
   const getModel = () => {
-    let model  = models.find(m => m.name === getQuerys().type) || models[0]
-    getQuerys().type == "bpmn" ? model.newData = codeData.bpmn : model.newData = codeData.nodeRed
+    let model  = models.find(m => m.name === type.value) || models[0]
+    model.newData = code.value
     return model
   }
   const propertiesPanelConfig: PropertiesPanelConfig = propertiesPanelConfigs[getModel().name]
@@ -276,9 +69,10 @@
   const { propertiesPanel } = modeler
 
   const setCode = () => {
-    let c = modeler.lf?.getGraphRawData()
+    let c:any = modeler.lf?.getGraphRawData()
     if (typeof c == 'object') c = JSON.stringify(c, null, 2)
     code.value = c
+    emit('getCode',c)
   }
 
   hljs.registerLanguage('json', json);
