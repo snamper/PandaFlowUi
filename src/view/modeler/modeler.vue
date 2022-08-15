@@ -1,9 +1,12 @@
 <template>
-  <FloeModeler :code="code" :type="type" @getCode="getCode"></FloeModeler>
+  <div>
+    <FlowModeler :code="code" :type="type" @onSave="onSave"></FlowModeler>
+  </div>
+
 </template>
 
 <script setup lang="ts">
-import  FloeModeler  from '@/components/flow/modeler/index.vue'
+import  FlowModeler  from '@/components/flow/modeler/index.vue'
 import {useRoute} from "vue-router";
 import {ref} from "vue";
 
@@ -226,7 +229,7 @@ let codeData = {
 const code = ref(getQuerys().type == "bpmn" ? codeData.bpmn : codeData.nodeRed)
 const type = ref(getQuerys().type)
 
-const getCode = (newCode:any) => {
+const onSave = (newCode:any) => {
   console.log(newCode)
 }
 

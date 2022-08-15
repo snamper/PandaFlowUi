@@ -21,7 +21,6 @@ const viteConfig: UserConfig = {
       },
     },
   },
-  css: { preprocessorOptions: { css: { charset: false } } },
 };
 
 export default viteConfig;

@@ -17,7 +17,7 @@
     "highlight.js": "^11.6.0",
     "resize-detector": "^0.3.0",
     "scss": "^0.2.4",
-    "splitpanes": "^3.1.1",
+    "splitpanes": "^3.1.0",
     "vue": "^3.2.37",
     "vue-router": "^4.1.2"
   },

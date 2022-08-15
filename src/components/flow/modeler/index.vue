@@ -1,13 +1,12 @@
 <template>
   <el-container class="layout">
     <el-header class="layout-header"><toolbar /></el-header>
-    <el-main>
-      <splitpanes class="default-theme" @resized="onResize" :dbl-click-splitter="false" :push-other-panes="false">
+    <el-main class="layout-main">
+      <splitpanes class="default-theme" @resized="onResize" :dbl-click-splitter="false" :push-other-panes="false" >
         <pane :size="propertiesPanel.collapsed ? 100 - paneSize / 100 : 100 - paneSize">
-          <div ref="container" class="layout-container"></div>
+         <div ref="container" class="layout-container"></div>
         </pane>
-        <pane :size="propertiesPanel.collapsed ? paneSize / 100 : paneSize" v-show="!propertiesPanel.collapsed"
-              style="padding: 10px;background-color: #f8f8f8;overflow: hidden auto">
+        <pane :size="propertiesPanel.collapsed ? paneSize / 100 : paneSize" v-show="!propertiesPanel.collapsed" style="min-height: calc(100vh - 80px);padding: 4px;">
           <keep-alive>
             <component :is="propertiesPanel.component" />
           </keep-alive>
@@ -45,7 +44,7 @@
       code: String,
       type: String
   })
-  const emit = defineEmits(["getCode"])
+  const emit = defineEmits(["onSave"])
 
   const container = ref<HTMLElement>()
   const paneSize = ref(20)
@@ -68,11 +67,19 @@
   const modeler = useModeler(getModel(), propertiesPanelConfig)
   const { propertiesPanel } = modeler
 
-  const setCode = () => {
+  const getCode = () => {
     let c:any = modeler.lf?.getGraphRawData()
     if (typeof c == 'object') c = JSON.stringify(c, null, 2)
-    code.value = c
-    emit('getCode',c)
+    return c
+  }
+
+  const setCode = () => {
+    code.value = getCode()
+
+  }
+
+  const onSave = () => {
+    emit('onSave',getCode())
   }
 
   hljs.registerLanguage('json', json);
@@ -97,7 +104,7 @@
   }
 
   // provide context
-  provide('modeler_context', Object.assign(modeler, { codeDrawerVisible }))
+  provide('modeler_context', Object.assign(modeler, { onSave, codeDrawerVisible }))
 
   // init
   onMounted(() => {
@@ -151,28 +158,29 @@
   })
 </script>
 
-<style >
+<style scoped lang="scss">
   .layout{
     height: 100%;
     width: 100%;
     margin: 0;
     overflow: hidden;
   }
-  :deep(aside) {  /* 防止aside样式被外部样式覆盖！！ */
-    margin: 0;
-    padding: 0;
-    background: inherit;
-  }
 
   .layout-header{
-    background: #fff;
-    height: 40px;
-    width: 100%;
+    height: 42px;
     line-height: 32px;
+    padding: 5px 10px;
+    width: 100%;
     padding: 5px 10px
   }
+
+  .layout-main{
+    background: #fff;
+    padding: 5px 10px
+  }
+
   .layout-container{
-    height: 100%;
+    min-height: calc(100vh - 80px);
     width: 100%;
     padding: 4px;
     box-shadow: 0 0 4px rgb(0 0 0 / 30%) inset;

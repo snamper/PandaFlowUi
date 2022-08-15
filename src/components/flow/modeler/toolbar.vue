@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-button-group>
-      <el-button :disabled="!modified" type="primary">
+      <el-button :disabled="!modified" type="primary" @click="onSave">
         <SvgIcon name="elementMessageBox"/>保存
       </el-button>
     </el-button-group>
@@ -103,6 +103,6 @@ const {
   exportPng, exportGraphRawData, // exportGraphData,
   showMiniMap, toggleMiniMap, scale, zoomOut, zoomIn, resetZoom, fitView,
   modified, undoDisable, redoDisable, undo, redo, propertiesPanel,
-  modelType, codeDrawerVisible
+  modelType, codeDrawerVisible,onSave
 } = modelerContext
 </script>

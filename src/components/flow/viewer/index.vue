@@ -1,7 +1,9 @@
 <template>
   <el-container class="layout" >
     <el-header class="layout-header"><toolbar /></el-header>
-    <el-main><div ref="container" class="layout-container"></div></el-main>
+    <el-main class="layout-main">
+      <div ref="container" class="layout-container"></div>
+    </el-main>
   </el-container>
   <el-drawer
           v-model="codeDrawerVisible"
@@ -98,9 +100,15 @@ import {provide, ref, onMounted, watch} from "vue";
   }
   .layout-header{
     background: #fff;
-    height: 40px;
+    height: 42px;
     width: 100%;
     line-height: 32px;
+    padding: 5px 10px
+  }
+  .layout-main{
+    background: #fff;
+    height: 95%;
+    width: 100%;
     padding: 5px 10px
   }
   .layout-container{

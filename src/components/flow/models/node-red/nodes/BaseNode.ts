@@ -1,5 +1,5 @@
 import { h, NodeConfig, RectNode, RectNodeModel } from "@logicflow/core";
-import { getBytesLength } from '../../util';
+import { getBytesLength } from '../util';
 
 
 class RedNodeModel extends RectNodeModel {
