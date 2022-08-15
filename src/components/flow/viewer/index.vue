@@ -107,23 +107,15 @@ import {provide, ref, onMounted, watch} from "vue";
   }
   .layout-main{
     background: #fff;
-    height: 95%;
-    width: 100%;
     padding: 5px 10px
   }
   .layout-container{
-    height: 100%;
+    height: 95%;
     width: 100%;
     padding: 4px;
     box-shadow: 0 0 4px rgb(0 0 0 / 30%) inset;
     background: #fff;
-      z-index: 999;
+    z-index: 999;
   }
 
-  pre,
-  pre code.hljs {
-    overflow: visible;
-    margin: 0;
-    background-color: transparent;
-  }
 </style>
