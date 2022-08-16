@@ -13,6 +13,8 @@ import SvgIcon from '@/components/svgIcon/index.vue';
 
 import router from './router/index'
 
+import PandaFlow from './components/flow/index'
+
 const app = createApp(App);
 
 const icons = svg as any;
@@ -24,5 +26,6 @@ app.component('SvgIcon', SvgIcon);
 app
     .use(router)
     .use(ElementPlus, {size: "default" })
+    .use(PandaFlow)
     .mount('#app')
 

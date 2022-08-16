@@ -6,7 +6,7 @@
         <pane :size="propertiesPanel.collapsed ? 100 - paneSize / 100 : 100 - paneSize">
          <div ref="container" class="layout-container"></div>
         </pane>
-        <pane :size="propertiesPanel.collapsed ? paneSize / 100 : paneSize" v-show="!propertiesPanel.collapsed" style="min-height: calc(100vh - 80px);padding: 4px;">
+        <pane class="layout-pane" :size="propertiesPanel.collapsed ? paneSize / 100 : paneSize" v-show="!propertiesPanel.collapsed">
           <keep-alive>
             <component :is="propertiesPanel.component" />
           </keep-alive>
@@ -186,5 +186,10 @@
     box-shadow: 0 0 4px rgb(0 0 0 / 30%) inset;
     background: #fff;
     z-index: 999;
+  }
+
+  .layout-pane{
+    min-height: calc(100vh - 80px);
+    padding: 0px 10px 10px 10px;
   }
 </style>

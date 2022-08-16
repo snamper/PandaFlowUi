@@ -1,9 +1,8 @@
 <template>
-  <FloeView :code="code" :type="type"></FloeView>
+  <flow-view :code="code" :type="type"></flow-view>
 </template>
 
 <script setup lang="ts">
-import  FloeView  from '@/components/flow/viewer/index.vue'
 import {useRoute} from "vue-router";
 import {ref} from "vue";
 

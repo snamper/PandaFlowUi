@@ -1,6 +1,8 @@
 import { UserConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 
+import path from 'path'
+
 const viteConfig: UserConfig = {
   plugins: [vue()],
   base: './',
@@ -11,6 +13,11 @@ const viteConfig: UserConfig = {
   },
   build: {
     //outDir: 'static',
+    lib: {
+      entry: path.resolve(__dirname, 'src/components/index.ts'),
+      name: 'TestPub',
+      fileName: (format) => `flow.${format}.ts`
+    },
     minify: 'esbuild',
     sourcemap: false,
     rollupOptions: {

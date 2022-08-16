@@ -1,12 +1,10 @@
 <template>
-  <div>
-    <FlowModeler :code="code" :type="type" @onSave="onSave"></FlowModeler>
-  </div>
-
+    <div>
+        <flow-model :code="code" :type="type" @onSave="onSave"></flow-model>
+    </div>
 </template>
 
 <script setup lang="ts">
-import  FlowModeler  from '@/components/flow/modeler/index.vue'
 import {useRoute} from "vue-router";
 import {ref} from "vue";
 
