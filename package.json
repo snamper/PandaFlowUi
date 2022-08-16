@@ -6,8 +6,6 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "lib-model": "vite build --config vite-lib-model.config.ts",
-    "lib-view": "vite build --config vite-lib-model.config.ts",
     "preview": "vite preview"
   },
   "dependencies": {

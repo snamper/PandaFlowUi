@@ -14,19 +14,21 @@ const viteConfig: UserConfig = {
   build: {
     //outDir: 'static',
     lib: {
-      entry: path.resolve(__dirname, 'src/components/index.ts'),
-      name: 'TestPub',
-      fileName: (format) => `flow.${format}.ts`
+      entry: path.resolve(__dirname, 'src/components/flow/index.ts'),
+      name: 'PandaFlow',
+      fileName: (format) => `pandaflow.${format}.ts`
     },
-    minify: 'esbuild',
-    sourcemap: false,
     rollupOptions: {
+      // 确保外部化处理那些你不想打包进库的依赖
+      external: ['vue','vue-router'],
       output: {
-        entryFileNames: `assets/[name].${new Date().getTime()}.js`,
-        chunkFileNames: `assets/[name].${new Date().getTime()}.js`,
-        assetFileNames: `assets/[name].${new Date().getTime()}.[ext]`,
-      },
-    },
+        // 在 UMD 构建模式下为这些外部化的依赖提供一个全局变量
+        globals: {
+          vue: 'Vue'
+        }
+      }
+    }
+
   },
 };
 
